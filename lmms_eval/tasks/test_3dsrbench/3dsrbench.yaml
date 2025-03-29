@@ -1,0 +1,16 @@
+dataset_path: ccvl/3dsrbench_hf
+test_split: test
+
+task: 3dsrbench
+output_type: generate_until
+doc_to_visual: !function utils.doc_to_visual_3dsrbench
+doc_to_text: !function utils.doc_to_text_3dsrbench
+doc_to_target: "answer"
+generation_kwargs:
+  until:
+    - "ASSISTANT:"
+process_results: !function utils.process_results_3dsrbench
+metric_list:
+  - metric: 3dsrbench_score
+    aggregation: !function utils.aggregate_results_3dsrbench
+    higher_is_better: true
